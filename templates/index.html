@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <div class="col-8">
+    <h1>Popular</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for meal in topRated %}
+      <div class="col">
+        <a
+          href="{% url 'mealsite:detail' meal.pk %}"
+          class="card text-decoration-none text-body"
+        >
+          <img
+            src="{{meal.imageUrl}}"
+            class="card-img-top card-image"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{meal.name}}</h5>
+            <p class="card-text">{{meal.avgRating}}({{meal.numberOfVotes}})</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h1>Recently</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for meal in recentlyAdded %}
+      <div class="col">
+        <a href="" class="card text-decoration-none text-body">
+          <img
+            src="{{meal.imageUrl}}"
+            class="card-img-top card-image"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{meal.name}}</h5>
+            <p class="card-text">{{meal.avgRating}}({{meal.numberOfVotes}})</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="col-4">
+    <form method="POST">
+      {% csrf_token %} {{form.as_p}}
+      <input type="submit" value="作成する" />
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

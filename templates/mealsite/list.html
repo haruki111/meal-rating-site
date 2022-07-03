@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{title}}</h2>
+<div class="d-flex">
+  <a href="?sort=rate" class="me-2">Rating</a>
+  <a href="?sort=country" class="me-2">Country</a>
+  <a href="?sort=data" class="me-2">Data</a>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+  {% for meal in object_list %}
+  <div class="col">
+    <a
+      href="{% url 'mealsite:detail' meal.pk %}"
+      class="card mb-3 text-decoration-none text-body"
+      style="max-width: 540px"
+    >
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="{{meal.imageUrl}}"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{meal.name}}({{meal.countryOfOrigin}})</h5>
+            <p class="card-text">{{meal.avgRating}}({{meal.numberOfVotes}})</p>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

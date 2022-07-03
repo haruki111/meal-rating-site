@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="text-center m-auto mw-100" style="width: 500px">
+  <h3 class="text-center">{{meal.name}}</h3>
+  <div class="">
+    <img
+      src="{{meal.imageUrl}}"
+      class="mw-100"
+      style="width: 500px"
+      alt="..."
+    />
+  </div>
+  <div class="text-start">
+    <p>County Origin: {{meal.countryOfOrigin}}</p>
+    <p>Description: {{meal.description}}</p>
+    <p>Score: {{meal.avgRating}}({{meal.numberOfVotes}})</p>
+  </div>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="d-flex justify-content-around">
+      <h5 class="">
+        {{ form.rating }}
+        <span id="rating-display" class="h2 pl-3">[[val]]</span>
+      </h5>
+
+      <div>
+        <button type="submit" class="btn btn-primary">投票</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock content %} {% block script %}
+<script>
+  const app = {
+    data() {
+      return {
+        val: 3,
+      };
+    },
+    method() {
+      const rating = document.getElementById("id_rating");
+      rating.setAttribute("v-model", "val");
+      rating.removeAttribute("value");
+    },
+    delimiters: ["[[", "]]"],
+  };
+  app.method();
+  Vue.createApp(app).mount("#app");
+</script>
+{% endblock script %}

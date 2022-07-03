@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %} {% endblock title %}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid container">
+        <a class="navbar-brand" href="{% url 'mealsite:index'%} ">Home</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'mealsite:list' 'morning' %}">Morning</a>
+            <a class="nav-link" href="{% url 'mealsite:list' 'afternoon' %}"
+              >Afternoon</a
+            >
+            <a class="nav-link" href="{% url 'mealsite:list' 'evening' %}">Evening</a>
+            <a class="nav-link" href="{% url 'mealsite:list' 'recently' %}">Recently</a>
+            <a class="nav-link" href="{% url 'mealsite:list' 'toprate' %}">Top Rated</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="p-4 container" id="app">{% block content %}{% endblock content %}</div>
+    <footer class="contaner">
+      <p class="mt-5 text-center">@2021</p>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    {% block script %}{% endblock script %}
+  </body>
+</html>
