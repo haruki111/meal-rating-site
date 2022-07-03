@@ -6,8 +6,6 @@ from django.urls import reverse_lazy
 from django.http import Http404
 from django.db.models import Avg
 from .forms import DetailForm
-import json
-from django.core import serializers
 
 
 class IndexView(CreateView):
@@ -15,7 +13,7 @@ class IndexView(CreateView):
     model = Meal
     fields = ('name', 'description', 'imageUrl',
               'countryOfOrigin', 'typicalMealTime')
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('mealsite:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,5 +90,5 @@ class MealDetail(DetailView, FormView):
         rating.save()
 
         self.success_url = reverse(
-            'detail', kwargs={'pk': meal_id})
+            'mealsite:detail', kwargs={'pk': meal_id})
         return super().form_valid(form)
